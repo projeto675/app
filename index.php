@@ -28,11 +28,18 @@ session_start();
         <script src="js/personalizado.js"></script>
         <? 
         include'conexao.php';
-        include'menu_superior.php';
         if(!isset ($_SESSION['session'])) {
             include'login.php';
             exit();
         }
+        if($_SESSION['nivel']=="user"){
+            include'menu_superior_user.php';
+        }
+        elseif($_SESSION['nivel']=="coord"){
+            include'menu_superior.php';
+        }
+        else{  include'menu_superior.php';}
+       
       
 
       ?>

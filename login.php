@@ -39,7 +39,7 @@ a{
     $stmt->bindValue(":senha", ($_POST['senha']));
     $stmt->execute();
 
-    if($stmt->rowCount() == 1){ echo "oook";  }
+    if($stmt->rowCount() == 1){   }
     //$stmt = $conexao->prepare("SELECT * FROM usuario WHERE nome=$nome");
      if ($stmt->execute()) {
         /* Return number of rows that were deleted */
@@ -51,6 +51,7 @@ a{
           echo  $_SESSION['id_coordenado']=$login->id_coordenado;echo '</br>';
           echo  $_SESSION['local_trabalho']=$login->local_trabalho;echo '</br>';
           echo  $_SESSION['session']=$login->session;echo '</br>';
+          echo  $_SESSION['nivel']=$login->nivel;echo '</br>';
           echo  @$login->nivel;echo '</br>';
           header('Location: index.php');
         }
@@ -86,7 +87,7 @@ a{
     </div>
     </from>
     <div class="row">
-    <h4><a class="navbar-brand" href="#">
+    <h4><a class="navbar-brand" href="cadastro_usuario.php">
     
    Criar Conta 
   </a><a class="navbar-brand" href="#">
