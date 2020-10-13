@@ -2,7 +2,7 @@
 session_start();
 ?>
 <!--**
- * @author Cesar Szpak - Celke - cesar@celke.com.br
+ * @author bit Brasilia 
  * @pagina desenvolvida usando FullCalendar e Bootstrap 4,
  * o código é aberto e o uso é free, 
  * porém lembre-se de conceder os créditos ao desenvolvedor.

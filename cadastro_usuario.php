@@ -1,4 +1,5 @@
 <? if (isset($_POST) &&(!empty($_POST))){ 
+ if(isset( $_SESSION['envio']) &&( $_SESSION['envio']) ) { 
      // include "conexao.php";
      $nome=trim($_POST['nome']);
      $sobre_nome=trim($_POST['sobre_nome']);
@@ -6,7 +7,8 @@
      $numero_registro_profissional=trim($_POST['numero_registro_profissional']);
      $profissao=trim($_POST['profissao']);
      $numero_registro_profissional=trim($_POST['numero_registro_profissional']);
-     $data=date('y-m-d H:i:s');
+     $data=date('y-m-d h:i:s');
+    
      $stmt = $conexao->prepare("INSERT INTO usuario (nome,sobrenome,local_trabalho,numero_registro_profissional,profissao,senha,data_cadastro) VALUES (?, ?,?,?,?,?,?)");
      $stmt->bindParam(1, $nome);
      $stmt->bindParam(2, $sobre_nome);
@@ -16,16 +18,19 @@
      $stmt->bindParam(6, $numero_registro_profissional);
      $stmt->bindParam(7, $data);
      $stmt->execute();   
-     if($stmt->execute()){ echo 'deu tudo certo';}
-     echo "aqui teve um post";  ?>
+     if($stmt->execute()){ 
+      $_SESSION['envio']="1";
+     } }
+     ?>
      <div class="alert alert-light" role="alert">
   <h4 class="alert alert-dark">Cadastro Realizado com sucesso!</h4>
-  <p></p>
+  <p> SE FOR USUARIO DIRECIONAR BUSCAR ESCALA </p>
   <hr>
   <p class="mb-0"></p>
 </div><?
      }
-
+////////////não exibir formulario se japrencidoe deu tudo ceto ////////
+else{ 
     ?><form role="form" method="post">        
   <form class="needs-validation" novalidate>
   <div class="form-row">
@@ -136,3 +141,4 @@
   
  
 </form>
+<? } ?>
