@@ -1,5 +1,5 @@
-<? if (isset($_POST) &&(!empty($_POST))){ 
- if(isset( $_SESSION['envio']) &&( $_SESSION['envio']) ) { 
+<? if (isset($_POST) &&(!empty($_POST)) && $_POST['session']==session_id()){ 
+ if( !isset($_SESSION['envio']) ) { 
      // include "conexao.php";
      $nome=trim($_POST['nome']);
      $sobre_nome=trim($_POST['sobre_nome']);
@@ -17,10 +17,10 @@
      $stmt->bindParam(5, $profissao);
      $stmt->bindParam(6, $numero_registro_profissional);
      $stmt->bindParam(7, $data);
-     $stmt->execute();   
-     if($stmt->execute()){ 
-      $_SESSION['envio']="1";
-     } }
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+    }  }
      ?>
      <div class="alert alert-light" role="alert">
   <h4 class="alert alert-dark">Cadastro Realizado com sucesso!</h4>
@@ -28,9 +28,11 @@
   <hr>
   <p class="mb-0"></p>
 </div><?
-     }
+ exit();    }
 ////////////não exibir formulario se japrencidoe deu tudo ceto ////////
 else{ 
+  unset( $_SESSION['envio'] ); 
+  echo @$_SESSION['envio'];
     ?><form role="form" method="post">        
   <form class="needs-validation" novalidate>
   <div class="form-row">
@@ -113,6 +115,7 @@ else{
       </div>
     </div>
   </div>
+  <input type="hidden" name="session" value="<?=session_id();?>" />
   <button class="btn btn-primary" type="submit">Salvar</button>
 </form>
 

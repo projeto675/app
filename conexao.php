@@ -4,6 +4,11 @@
  * o código é aberto e o uso é free,
  * porém lembre-se de conceder os créditos ao desenvolvedor.
  */
+if(!isset($_SESSION) ){
+    session_start();
+    session_id();
+
+}
 define('HOST', 'localhost');
 define('USER', 'root');
 define('PASS', '');

@@ -28,6 +28,8 @@ session_start();
         <script src="js/personalizado.js"></script>
         <? 
         include'conexao.php';
+        include'login.php';
+
         include'menu_superior.php';?>
     </head>
     <body>
