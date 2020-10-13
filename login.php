@@ -93,7 +93,10 @@ a{
   Esquecir a Senha 
   </a>
 </h4>
-        
-        </div>
+  <div class="col-md-12 form-group">
+  <a class="btn btn-outline-dark" href="cadastro_cordenador.php">
+  Sou Coordenador <br> quero criar escala para minha equipe
+  </a>
+</div>   </div>
     </div>
 </div>   
