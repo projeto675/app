@@ -6,7 +6,7 @@
      $numero_registro_profissional=trim($_POST['numero_registro_profissional']);
      $profissao=trim($_POST['profissao']);
      $numero_registro_profissional=trim($_POST['numero_registro_profissional']);
-     $data=date('y-m-d');
+     $data=date('y-m-d H:i:s');
      $stmt = $conexao->prepare("INSERT INTO usuario (nome,sobrenome,local_trabalho,numero_registro_profissional,profissao,senha,data_cadastro) VALUES (?, ?,?,?,?,?,?)");
      $stmt->bindParam(1, $nome);
      $stmt->bindParam(2, $sobre_nome);
