@@ -15,7 +15,7 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='css/core/main.min.css' rel='stylesheet' />
         <link href='css/daygrid/main.min.css' rel='stylesheet' />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/personalizado.css?<?time();?>">
 
         <script src='js/core/main.min.js'></script>
@@ -28,9 +28,14 @@ session_start();
         <script src="js/personalizado.js"></script>
         <? 
         include'conexao.php';
-        include'login.php';
+        include'menu_superior.php';
+        if(!isset ($_SESSION['session'])) {
+            include'login.php';
+            exit();
+        }
+      
 
-        include'menu_superior.php';?>
+      ?>
     </head>
     <body>
     <? if(isset($_GET["cadastro_user"])){      

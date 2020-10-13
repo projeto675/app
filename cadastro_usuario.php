@@ -8,8 +8,9 @@
      $profissao=trim($_POST['profissao']);
      $numero_registro_profissional=trim($_POST['numero_registro_profissional']);
      $data=date('y-m-d h:i:s');
+     $session=$_POST['session'];
     
-     $stmt = $conexao->prepare("INSERT INTO usuario (nome,sobrenome,local_trabalho,numero_registro_profissional,profissao,senha,data_cadastro) VALUES (?, ?,?,?,?,?,?)");
+     $stmt = $conexao->prepare("INSERT INTO usuario (nome,sobrenome,local_trabalho,numero_registro_profissional,profissao,senha,data_cadastro,session) VALUES (?,?, ?,?,?,?,?,?)");
      $stmt->bindParam(1, $nome);
      $stmt->bindParam(2, $sobre_nome);
      $stmt->bindParam(3, $local_trabalho);
@@ -17,6 +18,7 @@
      $stmt->bindParam(5, $profissao);
      $stmt->bindParam(6, $numero_registro_profissional);
      $stmt->bindParam(7, $data);
+     $stmt->bindParam(8, $session);
      $cad_user_ok=$stmt->execute();   
      if($cad_user_ok){ 
      $_SESSION['envio']="1";
