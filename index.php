@@ -16,7 +16,7 @@ session_start();
         <link href='css/core/main.min.css' rel='stylesheet' />
         <link href='css/daygrid/main.min.css' rel='stylesheet' />
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/personalizado.css?<?time();?>">
+        <link rel="stylesheet" href="css/personalizado.css?<?=time();?>">
 
         <script src='js/core/main.min.js'></script>
         <script src='js/interaction/main.min.js'></script>
@@ -50,6 +50,13 @@ session_start();
     exit();
 
     }
+     if(isset($_GET["cadastrar_equpe"])){      
+    include'cadastar_equipe.php';
+    exit();
+
+    }
+
+     
         if (isset($_SESSION['msg'])) {
             echo $_SESSION['msg'];
             unset($_SESSION['msg']);
@@ -59,7 +66,7 @@ session_start();
 
        
 
-        <div id='calendar'></div>
+        <div class="col-md-12 ng-scope" id='calendar'></div>
 
         <div class="modal fade" id="visualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">

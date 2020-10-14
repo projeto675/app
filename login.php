@@ -52,6 +52,7 @@ a{
           echo  $_SESSION['local_trabalho']=$login->local_trabalho;echo '</br>';
           echo  $_SESSION['session']=$login->session;echo '</br>';
           echo  $_SESSION['nivel']=$login->nivel;echo '</br>';
+          echo  $_SESSION['id']=$login->id;echo '</br>';
           echo  @$login->nivel;echo '</br>';
           header('Location: index.php');
         }

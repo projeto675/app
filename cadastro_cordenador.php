@@ -16,7 +16,7 @@ session_start();
         <link href='css/core/main.min.css' rel='stylesheet' />
         <link href='css/daygrid/main.min.css' rel='stylesheet' />
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/personalizado.css?<?time();?>">
+        <link rel="stylesheet" href="css/personalizado.css?<?=time();?>">
 
         <script src='js/core/main.min.js'></script>
         <script src='js/interaction/main.min.js'></script>
@@ -25,7 +25,7 @@ session_start();
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script src="js/personalizado.js"></script>
+        <script src="js/personalizado.js?<?=time();?>"></script>
         <? 
         include'conexao.php';
         include'menu_superior.php';
@@ -34,6 +34,24 @@ session_start();
     <body>
     
        <? if (isset($_POST) &&(!empty($_POST)) && $_POST['session']==session_id()){ 
+      
+      
+
+    foreach ($_POST as $key => $value) {
+
+      
+        echo "<tr>";
+        echo "<br>";
+        echo $key;
+        echo "</td>";
+        echo "<br>";
+        echo $value;
+        echo "</td>";
+        echo "</tr>";
+    }
+
+
+
  if( !isset($_SESSION['envio']) ) { 
      // include "conexao.php";
      $nome=trim($_POST['nome']);
@@ -48,7 +66,8 @@ session_start();
      ///se coordenador////
      $nivel=trim("coord");
      $senha=trim($_POST['senha']);
-     $stmt = $conexao->prepare("INSERT INTO usuario (nome,sobrenome,local_trabalho,numero_registro_profissional,profissao,senha,data_cadastro,session,endereco,nivel) VALUES (?,?,?,?, ?,?,?,?,?,?)");
+     $setor=trim($_POST['setor']);
+     $stmt = $conexao->prepare("INSERT INTO usuario (nome,sobrenome,local_trabalho,numero_registro_profissional,profissao,senha,data_cadastro,session,endereco,nivel,setor) VALUES (?,?,?,?,?, ?,?,?,?,?,?)");
      $stmt->bindParam(1, $nome);
      $stmt->bindParam(2, $sobre_nome);
      $stmt->bindParam(3, $local_trabalho);
@@ -58,8 +77,8 @@ session_start();
      $stmt->bindParam(7, $data);
      $stmt->bindParam(8, $session);
      $stmt->bindParam(9, $endereco);
-     /////se cordenador nivel igual coord///
      $stmt->bindParam(10, $nivel);
+     $stmt->bindParam(11, $setor);
      $cad_user_ok=$stmt->execute();   
      if($cad_user_ok){ 
      $_SESSION['envio']="1";
@@ -79,11 +98,9 @@ $stmt = $conexao->prepare("SELECT * FROM usuario WHERE nome = :nome and senha = 
 $stmt->bindValue(":nome", $_POST['nome']);
 $stmt->bindValue(":senha", ($_POST['senha']));
 $stmt->execute();
-
-
 //$stmt = $conexao->prepare("SELECT * FROM usuario WHERE nome=$nome");
- if ($stmt->execute()) {
-    /* Return number of rows that were deleted */
+if ($stmt->execute()) {
+/* Return number of rows that were deleted */
 $count = $stmt->rowCount();
 if($count=='1'){
     while ($login = $stmt->fetch(PDO::FETCH_OBJ)) {
@@ -92,8 +109,250 @@ if($count=='1'){
       echo  $_SESSION['id_coordenado']=$login->id_coordenado;echo '</br>';
       echo  $_SESSION['local_trabalho']=$login->local_trabalho;echo '</br>';
       echo  $_SESSION['session']=$login->session;echo '</br>';
+      echo  $_SESSION['id']=$login->id;echo '</br>';
       echo  $_SESSION['nivel']=$login->nivel;echo '</br>';
       echo  @$login->nivel;echo '</br>';
+///antes de logar adicionar locais que vc é cordenador setorcampoExtra
+if(isset($_POST['setorcampoExtra'])){
+     echo $_POST['setorcampoExtra'];
+     $setor=trim( $_POST['setorcampoExtra']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+////////////////////////////////////////////////////////////// 
+///antes de logar adicionar locais que vc é cordenador setorcampoExtra1
+if(isset($_POST['setorcampoExtra1'])){
+     echo $_POST['setorcampoExtra'];
+     $setor=trim( $_POST['setorcampoExtra1']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra2'])){
+     
+     $setor=trim( $_POST['setorcampoExtra2']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra3'])){
+    
+     $setor=trim( $_POST['setorcampoExtra3']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra4'])){
+     
+     $setor=trim( $_POST['setorcampoExtra4']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra5'])){
+     
+     $setor=trim( $_POST['setorcampoExtra5']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra6'])){
+     
+     $setor=trim( $_POST['setorcampoExtra6']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra7'])){
+     
+     $setor=trim( $_POST['setorcampoExtra7']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra8'])){
+     
+     $setor=trim( $_POST['setorcampoExtra8']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra9'])){
+     
+     $setor=trim( $_POST['setorcampoExtra9']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra10'])){
+     
+     $setor=trim( $_POST['setorcampoExtra10']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra11'])){
+    
+     $setor=trim( $_POST['setorcampoExtra11']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra12'])){
+     
+     $setor=trim( $_POST['setorcampoExtra12']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra13'])){
+     
+     $setor=trim( $_POST['setorcampoExtra13']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////  
+///antes de logar adicionar locais que vc é cordenador
+if(isset($_POST['setorcampoExtra14'])){
+     
+     $setor=trim( $_POST['setorcampoExtra14']);
+     $id_cordenador=trim($login->id);
+     $local_trabalho=trim($login->local_trabalho);
+     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
+     $stmt->bindParam(1,$setor);
+     $stmt->bindParam(2,$id_cordenador);
+     $stmt->bindParam(3,$local_trabalho);
+     $cad_user_ok=$stmt->execute();   
+     if($cad_user_ok){ 
+     $_SESSION['envio']="1";
+     }  else {echo "erro ao gravar"; }       
+      }
+//////////////////////////////////////////////////////////////        
+        
       header('Location: index.php');
     }
   }
@@ -125,27 +384,6 @@ else{
   </div>
 
 
-<script type="text/javascript">
-	function lookup(inputString) {
-		if(inputString.length == 0) {
-			// Hide the suggestion box.
-			$('#suggestions').hide();
-		} else {
-			$.post("listar_cidade.php", {queryString: ""+inputString+""}, function(data){
-				if(data.length >1) {
-					$('#suggestions').show();
-					$('#autoSuggestionsList').html(data);
-				}
-			});
-		}
-	} 
-	
-	function fill(thisValue) {
-		$('#inputString').val(thisValue);
-		setTimeout("$('#suggestions').hide();", 200);
-	}
-</script>
-
 
 		
 				<input type="text" name="endereco"  class="form-control" placeholder="Cidade Onde trabalha" size="30" value="" id="inputString" onKeyUp="lookup(this.value);" onBlur="fill();" />
@@ -171,13 +409,33 @@ else{
       </div>
     </div>
    
-    <div class="col-md-3 mb-3">
+   
+
+ 
+ 
+
+
+    
+    <div class="col-md-6 mb-3">
+        <label for="validationCustom04"></label>
+      <input type="text" name="setorcampoExtra" class="form-control campoDefault" placeholder="Setor(s) da Sua Cordenação"/>
+      
+      <div id="imendaHTMLtelefone" style="color: #rgba(0,0,0,.9);"></div>
+      
+      <a href="#" id="btnAdicionaTelefone" ><i class="fa fa-plus"></i> Adicionar mais setor</a>
+    </div>
+  
+
+
+
+    <div class="col-md-6 mb-3">
       <label for="validationCustom05"></label>
-      <input type="number" class="form-control" name="numero_registro_profissional"  placeholder="Número CPF" required>
+      <input type="number" class="form-control" name="numero_registro_profissional"  placeholder="CPF ou Nunmero de Inscrição conselho " required>
       <div class="invalid-feedback">
         Please provide a valid zip.
       </div>
     </div>
+
 
     <div class="col-md-3 mb-3">
       <label for="validationCustom04"></label>
@@ -259,3 +517,103 @@ else{
  
 </form>
 <? } ?>
+<script type="text/javascript">
+
+  var idContador = 0;
+      
+  function exclui(id){
+    var campo = $("#"+id.id);
+    campo.hide(200);
+  }
+
+  $( document ).ready(function() {
+    
+    $("#btnAdicionaEmail").click(function(e){
+      e.preventDefault();
+      var tipoCampo = "email";
+      adicionaCampo(tipoCampo);
+    })
+    
+    $("#btnAdicionaTelefone").click(function(e){
+      e.preventDefault();
+      var tipoCampo = "telefone";
+      adicionaCampo(tipoCampo);
+    })
+    
+    function adicionaCampo(tipo){
+
+      idContador++;
+      
+      var idCampo = "campoExtra"+idContador;
+      var idForm = "formExtra"+idContador;
+    
+      var html = "";
+      
+      html += "<div style='margin-top: 8px;' class='input-group' id='"+idForm+"'>";
+      html += "<input type='text' name='setor"+idCampo+"'id='"+idCampo+"' class='form-control novoCampo' placeholder='Setores de sua Cordenação'/>";
+      html += "<span class='input-group-btn'>";
+      html += "<button class='btn' onclick='exclui("+idForm+")' type='button'><span class='fa fa-trash'></span></button>";html += "<button class='btn' onclick='exclui("+idForm+")' type='button'><span class='fa fa-trash'></span></button>";
+      html += "</span>";
+      html += "</div>";
+      
+      $("#imendaHTML"+tipo).append(html);
+    }
+    
+    $(".btnExcluir").click(function(){
+      console.log("clicou");
+      $(this).slideUp(200);
+    })
+    
+    $("#btnSalvar").click(function(){
+    
+    var mensagem = "";
+    var novosCampos = [];
+    var camposNulos = false;
+    
+      $('.campoDefault').each(function(){
+        if($(this).val().length < 1){
+          camposNulos = true;
+        }
+      });
+      $('.novoCampo').each(function(){
+        if($(this).is(":visible")){
+          if($(this).val().length < 1){
+            camposNulos = true;
+          }
+          //novosCampos.push($(this).val());
+          mensagem+= $(this).val()+"\n";
+        }
+      });
+      
+      if(camposNulos == true){
+        alert("Atenção: existem campos nulos");
+      }else{
+        alert("Novos campos adicionados: \n\n "+mensagem);
+      }
+      
+      novosCampos = [];
+    })
+    
+  });
+  
+  </script>
+<script type="text/javascript">
+  function lookup(inputString) {
+    if(inputString.length == 0) {
+      // Hide the suggestion box.
+      $('#suggestions').hide();
+    } else {
+      $.post("listar_cidade.php", {queryString: ""+inputString+""}, function(data){
+        if(data.length >1) {
+          $('#suggestions').show();
+          $('#autoSuggestionsList').html(data);
+        }
+      });
+    }
+  } 
+  
+  function fill(thisValue) {
+    $('#inputString').val(thisValue);
+    setTimeout("$('#suggestions').hide();", 200);
+  }
+</script>
