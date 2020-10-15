@@ -85,7 +85,7 @@ else{
   <div class="col-md-12 mb-6">
   <label for="validationCustom04"></label>
 <? //////////////////////select com as opções criadas no banco de dados//////////////
-$id_cordenador=$_SESSION['id'];
+echo $id_cordenador=$_SESSION['id'];
 $stmt = $conexao->prepare("SELECT setor,id_cordenador FROM setor WHERE id_cordenador=:id_cordenador  limit 20 ");
 $stmt->bindValue(":id_cordenador", $id_cordenador);
 $stmt->execute(); ?>
@@ -109,58 +109,43 @@ $count = $stmt->rowCount();
  </div>
  </form>
  </div>
-    <?  } ////?>
-
-<<div class="simple-login-container">
-<div class="form-row">
-    <div class="col-md-12 mb-3">
+    <?  } else{ 
+      echo $_POST['setor'];
+      ?>
+    <form role="form" method="get" action="?cadastrar_equpe=equipe"> 
+    <div class="form-row col-md-12">
     <label for="validationCustom04"></label>
-		
-				<input type="text"  style="display: none;"   class="form-control" placeholder="Nome do Membro"  value="" id="inputString" onKeyUp="lookup(this.value);" onBlur="fill();" />
-				
-			<div class="suggestionsBox " id="suggestions" style="display: none;">
-				<div class="suggestionList" id="autoSuggestionsList">
-					 
-				</div>
-			</div>
-</div></div>
+    <div class="col-md-8 mb-3">
+           
+           <label for="validationCustom04"></label>
+		       <input type="text"     class="form-control" placeholder="Nome do Membro"  value="" id="inputString" onKeyUp="lookup(this.value);" onBlur="fill();" />
+		       <div class="suggestionsBox " id="suggestions" style="display: none;">
+		       <div class="suggestionList" id="autoSuggestionsList"></div>
+		       </div>
+          
+    </div>
+   <div class="col-md-3 mb-3"> 
+   <label for="validationCustom04"></label>
+        <input type="hidden" name="session" value="<?=session_id();?>" />
+        <button class="btn btn-primary form-control" type="submit">adicionar á equipe</button></div>
+   </div>
 
-<div class="col-md-12 mb-6">
-      <label for="validationCustom04"></label>
-<? 
-$id_cordenador=$_SESSION['id'];
-$stmt = $conexao->prepare("SELECT setor,id_cordenador FROM setor WHERE id_cordenador=:id_cordenador  limit 20 ");
+    
 
-$stmt->bindValue(":id_cordenador", $id_cordenador);
-$stmt->execute();
-//$stmt = $conexao->prepare("SELECT * FROM usuario WHERE nome=$nome");
-  ?>
-      <select class="custom-select" name="setor" id="validationCustom04" required>
-      	<? if ($stmt->execute()) {
-/* Return number of rows that were deleted */
-$count = $stmt->rowCount();
-     if($count >0){
-         ?> 
-             <?
-    while ($login = $stmt->fetch(PDO::FETCH_OBJ)) {
-        ?> <option value="<?= $login->setor;?>"><?= $login->setor;?></option>
- <? }
-    ?><?
-}
-
-
-} ?>
       
-      </select>
-      </div>  </div>
 
 
-  <div class="form-row">  
-  <div class="col-md-12 mb-3"> 
+
+
+</div>
+   
+  <div class="col-md-3 mb-3"> 
   <input type="hidden" name="session" value="<?=session_id();?>" />
-  <button class="btn btn-primary" type="submit">Salvar</button>
+  <label for="validationCustom04"></label>
+ 
 </div></div>
 </div>
+    <? }?>
 </form>
 
 <script>
@@ -189,3 +174,23 @@ $count = $stmt->rowCount();
  
 </form>
 <? } ?>
+<script type="text/javascript">
+  function lookup(inputString) {
+    if(inputString.length == 0) {
+      // Hide the suggestion box.
+      $('#suggestions').hide();
+    } else {
+      $.post("listar_membros.php", {queryString: ""+inputString+""}, function(data){
+        if(data.length >1) {
+          $('#suggestions').show();
+          $('#autoSuggestionsList').html(data);
+        }
+      });
+    }
+  } 
+  
+  function fill(thisValue) {
+    $('#inputString').val(thisValue);
+    setTimeout("$('#suggestions').hide();", 200);
+  }
+</script>
