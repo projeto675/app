@@ -1,18 +1,24 @@
 <? include_once'topo.php';
 include_once'menu_superior.php';
 if(isset($_POST['setor'])){
-
- 
+//////fazer o calculo o numero e tecnicos totais
+///para 12X24X12X96 precisa de 6 quipes 120horas casa 
+if($_POST['tipo_escala']=='12X24X12X96'){$n='6';}
+if($_POST['tipo_escala']=='12X36'){$n='4';}
+$numero_tecnicos_turno=trim($_POST['numero_tecnicos_turno']);
+$ntecnicos=$_POST['numero_tecnicos_turno']*$n;
    
     $setor=trim( $_POST['setor']);
     $id_cordenador=trim($_SESSION['id']);
     $local_trabalho=trim($_SESSION['local_trabalho']);
-    $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local,tipo_escala,numero_tecnicos_turno) VALUES (?,?,?,?,?)");
+    $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local,tipo_escala,numero_tecnicos_turno,numero_tec_total,numero_de_equipes) VALUES (?,?,?,?,?,?,?)");
     $stmt->bindParam(1,$setor);
     $stmt->bindParam(2,$id_cordenador);
     $stmt->bindParam(3,$local_trabalho);
     $stmt->bindParam(4,$_POST['tipo_escala']);
     $stmt->bindParam(5,$_POST['numero_tecnicos_turno']);
+    $stmt->bindParam(6,$ntecnicos);
+    $stmt->bindParam(7,$n);
     $cad_user_ok=$stmt->execute();   
     if($cad_user_ok){ 
     $_SESSION['envio']="1";
