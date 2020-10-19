@@ -1,19 +1,29 @@
-<? public function insert(){
+<? 
+include_once'conexao.php';
+ class cadastrar{
+ public function setor_coodenador() {
+    include_once'conexao.php';
+$stmt = $conexao->prepare("SELECT *FROM usuario   limit 20 ");
 
-    try{
-        $insert = $this->con->conectar()->prepare("INSERT INTO web_cadcli(nm_cliente, email_cliente, senha_cliente, id_identpess, img) values(:nome, :email, :Senha, :value,  :imagem);");
-        $insert->bindParam(":nome",  $this->nome, PDO::PARAM_STR);
-        $insert->bindParam(":email", $this->email, PDO::PARAM_STR);
-        $insert->bindParam("senha", $this->senha, PDO::PARAM_STR);
-        $insert->bindPAram(":value", $this->tpessoa, PDO::PARAM_STR);
-        $insert->bindParam(":imagem",$this->imagem, PDO::PARAM_STR);
-
-        if($insert->execute()){
-            return 'ok';
-        }else{
-            return 'erro';
-        }  
-    }catch(PDOexception $erro_1){
-        echo 'erro'.$erro_1->getMessage();
+$stmt->execute();
+//$stmt = $conexao->prepare("SELECT * FROM usuario WHERE nome=$nome");
+ if ($stmt->execute()) {
+/* Return number of rows that were deleted */
+$count = $stmt->rowCount();
+     if($count >0){
+         ?> <ul class="navbar-nav">
+             <div class="col-md-12 ">  
+             <?
+    while ($login = $stmt->fetch(PDO::FETCH_OBJ)) {
+        ?><li class="nav-item active">
+        <a class="nav-link" style="color: #343a40;" onClick="fill('<?= $login->nome;?> <?= $login->sobrenome;?>  <?= $login->local_trabalho;?>');" href="#"><?= $login->nome;?> <?= $login->sobrenome;?> <?= $login->local_trabalho;?> <span class="sr-only">(Página atual)</span></a>
+      </li><?
+        
     }
+    ?> </ul><?
 }
+
+
+} 
+} 
+ }

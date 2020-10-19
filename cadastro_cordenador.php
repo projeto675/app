@@ -112,248 +112,9 @@ if($count=='1'){
       echo  $_SESSION['id']=$login->id;echo '</br>';
       echo  $_SESSION['nivel']=$login->nivel;echo '</br>';
       echo  @$login->nivel;echo '</br>';
-///antes de logar adicionar locais que vc é cordenador setorcampoExtra
-if(isset($_POST['setorcampoExtra'])){
-     echo $_POST['setorcampoExtra'];
-     $setor=trim( $_POST['setorcampoExtra']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-////////////////////////////////////////////////////////////// 
-///antes de logar adicionar locais que vc é cordenador setorcampoExtra1
-if(isset($_POST['setorcampoExtra1'])){
-     echo $_POST['setorcampoExtra'];
-     $setor=trim( $_POST['setorcampoExtra1']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra2'])){
-     
-     $setor=trim( $_POST['setorcampoExtra2']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra3'])){
-    
-     $setor=trim( $_POST['setorcampoExtra3']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra4'])){
-     
-     $setor=trim( $_POST['setorcampoExtra4']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra5'])){
-     
-     $setor=trim( $_POST['setorcampoExtra5']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra6'])){
-     
-     $setor=trim( $_POST['setorcampoExtra6']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra7'])){
-     
-     $setor=trim( $_POST['setorcampoExtra7']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra8'])){
-     
-     $setor=trim( $_POST['setorcampoExtra8']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra9'])){
-     
-     $setor=trim( $_POST['setorcampoExtra9']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra10'])){
-     
-     $setor=trim( $_POST['setorcampoExtra10']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra11'])){
-    
-     $setor=trim( $_POST['setorcampoExtra11']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra12'])){
-     
-     $setor=trim( $_POST['setorcampoExtra12']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra13'])){
-     
-     $setor=trim( $_POST['setorcampoExtra13']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////  
-///antes de logar adicionar locais que vc é cordenador
-if(isset($_POST['setorcampoExtra14'])){
-     
-     $setor=trim( $_POST['setorcampoExtra14']);
-     $id_cordenador=trim($login->id);
-     $local_trabalho=trim($login->local_trabalho);
-     $stmt = $conexao->prepare("INSERT INTO setor (setor,id_cordenador,local) VALUES (?,?,?)");
-     $stmt->bindParam(1,$setor);
-     $stmt->bindParam(2,$id_cordenador);
-     $stmt->bindParam(3,$local_trabalho);
-     $cad_user_ok=$stmt->execute();   
-     if($cad_user_ok){ 
-     $_SESSION['envio']="1";
-     }  else {echo "erro ao gravar"; }       
-      }
-//////////////////////////////////////////////////////////////        
+
         
-      header('Location: index.php');
+      header('Location: cadastrar_setor.php');
     }
   }
 }
@@ -416,14 +177,7 @@ else{
 
 
     
-    <div class="col-md-6 mb-3">
-        <label for="validationCustom04"></label>
-      <input type="text" name="setorcampoExtra" class="form-control campoDefault" placeholder="Setor(s) da Sua Cordenação"/>
-      
-      <div id="imendaHTMLtelefone" style="color: #rgba(0,0,0,.9);"></div>
-      
-      <a href="#" id="btnAdicionaTelefone" ><i class="fa fa-plus"></i> Adicionar mais setor</a>
-    </div>
+    
   
 
 
@@ -437,21 +191,7 @@ else{
     </div>
 
 
-    <div class="col-md-3 mb-3">
-      <label for="validationCustom04"></label>
-      <select class="custom-select" name="profissao" id="validationCustom04" required>
-        <option selected disabled value="">Profissão</option>
-        <option>Enfermeiro</option>
-        <option>Tec de Enfermagem </option>
-        <option>Médico</option>
-        <option>Tecnico de Imagem</option>
-        <option>Agente Administrativo </option>
-        <option>Outros </option>
-      </select>
-      <div class="invalid-feedback">
-        Please select a valid state.
-      </div>
-    </div>  
+    
     <div class="col-md-5 mb-5">
       <label for="validationCustom05">Senha </label>
       <input type="password"  name="senha"class="form-control" id="validationCustom05" placeholder="escolha uma senha" required>
@@ -490,7 +230,13 @@ else{
   <input type="hidden" name="session" value="<?=session_id();?>" />
   <button class="btn btn-primary" type="submit">Salvar</button>
 </form>
-
+<br>
+<div class="alert alert-secondary" role="alert">
+  <h4 class="alert-heading">Proxima Etapa </h4>
+  <p>Você fará cadastro os setores de sua coordenação e as equipes de enfermagem </p>
+  <hr>
+ 
+</div>
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
