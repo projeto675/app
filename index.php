@@ -18,7 +18,7 @@
 
     }
      if(isset($_GET["cadastrar_equpe"])){      
-    include'cadastar_equipe.php';
+    //include'cadastar_equipe.php';
     exit();
 
     }

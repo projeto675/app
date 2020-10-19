@@ -1,7 +1,9 @@
 <? 
-
-$stmt = $conexao->prepare("SELECT id,local,numero_tecnicos_turno,setor,tipo_escala,numero_de_equipes,numero_tec_total  FROM setor  WHERE id_cordenador=:id    ORDER BY id DESC");
-$stmt->bindValue(":id", $_SESSION['id']);
+if(!isset($_SESSION['id_para_setor'])){
+    $_SESSION['id_para_setor']=$_GET['setor'];
+}
+$stmt = $conexao->prepare("SELECT id,local,numero_tecnicos_turno,setor,tipo_escala,numero_de_equipes,numero_tec_total  FROM setor  WHERE id=:id    ORDER BY id DESC");
+$stmt->bindValue(":id", $_SESSION['id_para_setor']);
 $stmt->execute();
 //$stmt = $conexao->prepare("SELECT * FROM usuario WHERE nome=$nome");
  if ($stmt->execute()) {
@@ -15,23 +17,23 @@ $stmt->execute();
            <th scope="col"> Tecnicos por equipe </th>
            <th scope="col">Número de equipes</th>
            <th scope="col">Total de Tecnicos do  setor</th>
-           <th scope="col">ação</th>
+         
          </tr>
        </thead><tbody><?
  $count = $stmt->rowCount();
-     if($count >0){?> <button type="button" class="btn btn-light">Você  tem setor <?=$count;?>  cadastrados</button> <?
+     if($count >0){
     while ($login = $stmt->fetch(PDO::FETCH_OBJ)) {
         ?>
+        <button type="button" class="btn btn-light">cadastrar tecnicos para setor  <?= $login->setor;?></button>
         <tr>
-      <th scope="row"><?= $login->id;?> </th>
+      <th scope="row"><?=$i_setor= $login->id;?> </th>
       <td><?= $login->local;?> </td>
       <td><?= $login->setor;?> </td>
       <td><?= $login->tipo_escala;?></td>
       <td><?= $login->numero_tecnicos_turno;?></td>
       <td><?= $login->numero_de_equipes;?></td>
       <td><?= $login->numero_tec_total;?></td>
-      <td><button type="button" class="btn btn-info"><a href="/app/app/montar_equipe.php?setor=<?=$login->id;?>">Gerenciar</a></button</td>
-
+   
     </tr>
    
       </li><?
