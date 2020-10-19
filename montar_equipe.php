@@ -28,17 +28,16 @@ if(isset($_POST['nome_tecnico'])){
        <input type="hidden" name="session" value="<?=session_id();?>" />
        <button class="btn btn-primary form-control" type="submit">adicionar á equipe</button></div>
   </div>
-
 </div>
-  
- 
-
 </div></div>
-</div>
-  
+</div>  
 </form>
-
+<?include_once'listar_equipe.php'; ?>
 <script>
+/////////////////////////////////////script para impedir reemvio pelo botão atualizar//
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
  'use strict';
