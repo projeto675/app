@@ -24,11 +24,11 @@ $stmt->execute();
      if($count >0){
     while ($login = $stmt->fetch(PDO::FETCH_OBJ)) {
         ?>
-        <button type="button" class="btn btn-light">cadastrar tecnicos para setor  <?= $login->setor;?></button>
+        <button type="button" class="btn btn-light">cadastrar tecnicos para setor  <?= $login->setor;?> Escala Normal </button>
         <tr>
       <th scope="row"><?=$i_setor= $login->id;?> </th>
       <td><?= $login->local;?> </td>
-      <td><?= $login->setor;?> </td>
+      <td><?= $nome_setor=$login->setor;?> </td>
       <td><?= $login->tipo_escala;?></td>
       <td><?= $login->numero_tecnicos_turno;?></td>
       <td><?= $login->numero_de_equipes;?></td>

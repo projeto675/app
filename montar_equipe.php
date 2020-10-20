@@ -2,12 +2,20 @@
 include_once'menu_superior.php';
 include_once'listar_setor_id.php';
 if(isset($_POST['nome_tecnico'])){
-
-    $stmt = $conexao->prepare("INSERT INTO equipe (nome,id_setor) VALUES (?,?)");
-    $stmt->bindParam(1,$_POST['nome_tecnico']);
-    $stmt->bindParam(2,$i_setor);
- 
-    $cad_user_ok=$stmt->execute();   
+  trim($_POST['nome_tecnico']);
+  $post=explode("/",$_POST['nome_tecnico']);
+  /////ver listar_membros.php 21/////
+  $id_membro=$post['0'];
+  $nome_membro=$post['1'];
+  $post['2'];
+  
+    $stmt = $conexao->prepare("INSERT INTO equipe (nome,setor,id_setor,id_membro,tipo_escala) VALUES (?,?,?,?,?)");
+    $stmt->bindParam(1,$nome_membro);
+    $stmt->bindParam(2,$nome_setor);
+    $stmt->bindParam(3,$i_setor);
+    $stmt->bindParam(4,$id_membro);
+    $stmt->bindParam(5,$_POST['tipo_escala']); 
+     $cad_user_ok=$stmt->execute();   
     if($cad_user_ok){ 
     $_SESSION['envio']="1";
     }  else {echo "erro ao gravar"; }       
@@ -17,16 +25,18 @@ if(isset($_POST['nome_tecnico'])){
    <div class="form-row col-md-12">
    <label for="validationCustom04"></label>
    <div class="col-md-8 mb-3">
-             <label for="validationCustom04"></label>
+             <label for="validationCustom04">Nome</label>
               <input type="text"   name="nome_tecnico"  class="form-control" placeholder="Nome do Membro"  value="" id="inputString" onKeyUp="lookup(this.value);" onBlur="fill();" />
               <div class="suggestionsBox " id="suggestions" style="display: none;">
               <div class="suggestionList" id="autoSuggestionsList"></div>
               </div>
    </div>
-  <div class="col-md-3 mb-3"> 
-  <label for="validationCustom04"></label>
+   
+
+  <div class="col-md-2 mb-3"> 
+  <label for="validationCustom04"><br></label>
        <input type="hidden" name="session" value="<?=session_id();?>" />
-       <button class="btn btn-primary form-control" type="submit">adicionar á equipe</button></div>
+       <button class="btn btn-primary form-control" type="submit">Salvar</button></div>
   </div>
 </div>
 </div></div>
