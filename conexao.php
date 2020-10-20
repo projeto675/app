@@ -1,11 +1,8 @@
 <?php
-
-if(!isset($_SESSION) ){
-    session_start();
-    session_id();
-}
-if($_SERVER['SERVER_NAME']='localhost'){
+echo $url=trim($_SERVER['SERVER_NAME']);
+if($url=='localhost'){ 
     include_once'conexao_local.php';
-}else{ 
-    include_once'conexao_remota.php';
-}
+    
+    echo "sou root";}else{include_once'conexao_remota.php';}
+
+?>
