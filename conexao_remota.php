@@ -16,13 +16,13 @@ if(!isset($_SESSION) ){
 define('HOST', 'mysql380.umbler.com');
 define('USER', 'irismar_100');
 define('PASS', 'irisMAR100');
-define('DBNAME', 'calendario');
+define('DBNAME', 'app_escala');
 
 $conn = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME . ';', USER, PASS);
 
 //////////////////////////////////////////////////////////////////////////////////
 try {
-    $conexao = new PDO("mysql:host=mysql380.umbler.com; dbname=calendario", "irismar_100", "irisMAR100");
+    $conexao = new PDO("mysql:host=mysql380.umbler.com; dbname=app_escala", "irismar_100", "irisMAR100");
     $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $conexao->exec("set names utf8");
 } catch (PDOException $erro) {
@@ -32,7 +32,7 @@ class Database{
     private $hostname = 'mysql380.umbler.com';
     private $username = 'irismar_100';
     private $password = 'irisMAR100';
-    private $database = 'calendario';
+    private $database = 'app_escala';
     private $conexao;
 
     public function conectar(){
